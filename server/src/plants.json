@@ -1,0 +1,14 @@
+{
+  "plant1": {
+    "name": "hydrangea",
+    "color": "blue",
+    "height_meters": 1,
+    "id": 1
+  },
+  "plant2": {
+    "name": "bugambilia",
+    "color": "pink",
+    "height_meters": 12,
+    "id": 2
+  }
+}
