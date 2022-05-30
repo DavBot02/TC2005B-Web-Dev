@@ -1,0 +1,13 @@
+{
+	"name": "suburban-almanac",
+	"private": true,
+	"version": "0.0.0",
+	"scripts": {
+		"start": "concurrently \"cd server && npm run start\" \"cd client && npm start\" ",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"concurrently": "^7.2.1"
+	}
+}
