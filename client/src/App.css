@@ -28,3 +28,9 @@ body {
 	height: 20px;
 	margin: 5px 0;
 }
+
+.form {
+	display: flex;
+	flex-direction: column;
+	margin: 10px;
+}

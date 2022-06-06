@@ -3,6 +3,7 @@ import './App.css'
 import axios from 'axios';
 
 import Card from "./components/Card"
+import Form from './components/Form';
 
 function App() {
   const [plants, setPlants] = useState([]);
@@ -32,12 +33,11 @@ function App() {
     }
   }
 
-  const uploadPlant = async () => {
+  const uploadAzalea = async () => {
     const response = await axios.post(`http://localhost:3001/plants/`, {
-      name: "azalea",
-      color: "purple",
-      height_meters: 10,
-      id: 3
+      name: "Azalea",
+      color: "Purple",
+      height_meters: 10
     });
     console.log(response)
     if (response.status === 200) {
@@ -46,21 +46,26 @@ function App() {
   }
 
   const showPlants = plants.map(plant => (
+
     <Card
       name={plant.name}
       height_meters={plant.height_meters}
       id={plant.id}
       color={plant.color}
-      onDelete={handleDelete} />
+      onDelete={handleDelete}
+      onSuccess={getAllPlants}
+      type="edit" />
   )
   )
-
-  console.log(plants);
 
   return (
     <div className="app">
       {showPlants}
-      <button className='card-button' onClick={() => uploadPlant()}>Add an azalea!</button>
+      <Card
+        onDelete={handleDelete}
+        onSuccess={getAllPlants}
+        type="create" />
+      <button className='card-button' onClick={() => uploadAzalea()}>Add an azalea!</button>
     </div >
   )
 }

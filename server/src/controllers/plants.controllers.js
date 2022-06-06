@@ -24,13 +24,12 @@ const getAllPlants = async (req, res, next) => {
 
 const uploadPlant = async (req, res, next) => {
 	try {
-		const { name, color, height, id } = req.body;
+		const { name, color, height_meters, id } = req.body;
 		connection.query(`INSERT INTO plant_data 
-			(name, color, height_meters, id) values 
+			(name, color, height_meters) values 
 			('${name}', 
 			'${color}', 
-			'${height}', 
-			'${id}')`,
+			${height_meters})`,
 			(error, results, fields) => {
 				if (error) throw error;
 				console.log(results)
@@ -43,22 +42,21 @@ const uploadPlant = async (req, res, next) => {
 
 const updatePlant = async (req, res, next) => {
 	try {
-		const { id } = req.params
-
-		fs.readFile(__dirname + "/" + "plants.json", "utf8", (err, data) => {
-			let current_data = JSON.parse(data)
-			current_data["plant" + id] = updatePlant["plant3"]
-			// console.log(current_data)
-			res.send(current_data)
-
-			fs.writeFile(__dirname + "/" + "plants.json", JSON.stringify(current_data, null, 2), "utf8", (err) => {
-				if (err) throw err;
-			})
-		})
+		const { name, color, height_meters } = req.body;
+		const { id } = req.params;
+		connection.query(`UPDATE plant_data
+			SET name = '${name}',
+				color = '${color}',
+				height_meters = ${height_meters}
+			WHERE id = ${id};`,
+			(error, results, fields) => {
+				if (error) throw error;
+				console.log(results)
+				res.end('The plant has been added.');
+			});
 	} catch (error) {
 		next(error);
 	}
-
 }
 
 const deletePlant = async (req, res, next) => {
